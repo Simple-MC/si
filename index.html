@@ -2,49 +2,39 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Regalo para Shofi</title>
+    <title>Para Shofi</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-            background-color: #fdfbf7;
-            padding-top: 50px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-        }
-        .btn {
-            display: block;
-            width: 80%;
-            margin: 15px auto;
-            padding: 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 15px;
-            transition: transform 0.2s;
-        }
-        .btn:hover { transform: scale(1.05); }
-        .btn-pdf { background-color: #ffcc00; color: #333; }
-        .btn-practica { background-color: #4a90e2; }
-        .btn-extra { background-color: #e67e22; }
+        body { font-family: sans-serif; text-align: center; background: #fdfbf7; padding: 20px; }
+        .btn { display: block; width: 200px; margin: 10px auto; padding: 15px; background: #ffcc00; text-decoration: none; color: black; border-radius: 10px; font-weight: bold; }
+        #game-container { display: none; margin-top: 20px; border: 2px solid #333; height: 300px; position: relative; background: white; cursor: crosshair; }
+        .target { width: 40px; height: 40px; background: red; border-radius: 50%; position: absolute; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¡Feliz Cumpleaños, Shofi!</h1>
-        <p>He preparado esto para ti, espero que te guste mucho.</p>
+    <h1>¡Feliz Cumpleaños Shofi!</h1>
+    <a href="Carta_Cumpleanos_V2.pdf" class="btn" target="_blank">📖 Leer mi carta</a>
+    <button class="btn" onclick="startGame()">🎯 Iniciar Práctica Aim</button>
 
-        <!-- Botón para ver el PDF -->
-        <a href="Carta_Cumpleanos_V2.pdf" class="btn btn-pdf" target="_blank">📖 Leer mi carta</a>
+    <div id="game-container" onclick="miss()"></div>
+    <p id="score">Puntuación: 0</p>
 
-        <!-- Botón para el modo práctica (enlace a tu juego de práctica en Roblox) -->
-        <a href="URL_DE_TU_JUEGO_DE_ROBLOX" class="btn btn-practica">🎯 Modo Práctica (Aim)</a>
-
-        <!-- Botón extra -->
-        <a href="#" class="btn btn-extra">✨ Mensaje secreto</a>
-    </div>
+    <script>
+        let score = 0;
+        function startGame() {
+            document.getElementById('game-container').style.display = 'block';
+            spawnTarget();
+        }
+        function spawnTarget() {
+            const container = document.getElementById('game-container');
+            container.innerHTML = '';
+            const t = document.createElement('div');
+            t.className = 'target';
+            t.style.top = Math.random() * 260 + 'px';
+            t.style.left = Math.random() * 560 + 'px';
+            t.onclick = (e) => { e.stopPropagation(); score++; document.getElementById('score').innerText = 'Puntuación: ' + score; spawnTarget(); };
+            container.appendChild(t);
+        }
+        function miss() { score = Math.max(0, score - 1); document.getElementById('score').innerText = 'Puntuación: ' + score; }
+    </script>
 </body>
 </html>
