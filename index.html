@@ -2,295 +2,49 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi nobia ❤️</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <title>Regalo para Shofi</title>
     <style>
         body {
-            background-color: #fce7f3; /* Fondo rosita pastel */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Patrick Hand', cursive;
-            background-image: radial-gradient(#fbcfe8 2px, transparent 2px);
-            background-size: 30px 30px; /* Puntitos cute en el fondo */
-        }
-        .hojita {
-            background-color: white;
-            width: 90%;
-            max-width: 420px;
-            min-height: 580px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.05);
-            position: relative;
-            padding: 40px 30px 80px 40px; 
-            background-image: repeating-linear-gradient(transparent, transparent 31px, #e5e7eb 31px, #e5e7eb 32px);
-            line-height: 32px;
-            font-size: 22px;
-            color: #374151;
-            display: none;
-            animation: fadeIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .hojita.activa {
-            display: block;
-        }
-        /* Margen rojo de la libreta */
-        .hojita::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 35px;
-            width: 2px;
-            background-color: #fca5a5;
-        }
-        .texto-cartita {
-            position: relative;
-            z-index: 10;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px) rotate(-1deg); }
-            to { opacity: 1; transform: translateY(0) rotate(0deg); }
-        }
-        
-        /* BOTONES ESTILO STICKER */
-        .btn-nav {
-            background-color: #fdf2f8; 
-            color: #db2777; 
-            border: 2px dashed #f472b6; 
-            padding: 4px 16px;
-            border-radius: 25px;
-            font-family: 'Patrick Hand', cursive;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 3px 3px 0px #f472b6;
-        }
-        .btn-nav:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px #f472b6;
-            background-color: #fce7f3;
-        }
-        .btn-nav:active {
-            transform: translate(3px, 3px);
-            box-shadow: 0px 0px 0px #f472b6;
-        }
-        .controles {
-            position: absolute;
-            bottom: 20px;
-            right: 25px;
-            left: 45px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* FOTOS TIPO POLAROID (Cargarán desde tu carpeta pictures/) */
-        .polaroid {
-            background: white;
-            padding: 10px 10px 20px 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            width: fit-content;
-            margin: 12px auto;
-            border: 1px solid #e5e7eb;
-            transition: transform 0.3s;
-        }
-        .polaroid:hover {
-            transform: scale(1.05) rotate(0deg) !important;
-        }
-        .polaroid img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 2px;
-        }
-        .polaroid-texto {
+            font-family: 'Segoe UI', sans-serif;
             text-align: center;
-            font-size: 18px;
-            color: #db2777;
-            margin-top: 5px;
-            line-height: 1.2;
+            background-color: #fdfbf7;
+            padding-top: 50px;
         }
-
-        .sticker {
-            position: absolute;
-            font-size: 2rem;
-            z-index: 20;
-            user-select: none;
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
         }
+        .btn {
+            display: block;
+            width: 80%;
+            margin: 15px auto;
+            padding: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-pdf { background-color: #ffcc00; color: #333; }
+        .btn-practica { background-color: #4a90e2; }
+        .btn-extra { background-color: #e67e22; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>¡Feliz Cumpleaños, Shofi!</h1>
+        <p>He preparado esto para ti, espero que te guste mucho.</p>
 
-    <div class="hojita activa" id="hoja1">
-        <div class="sticker" style="top: 15px; right: -10px; transform: rotate(15deg);">💌</div>
-        <div class="sticker" style="bottom: 80px; left: -10px; transform: rotate(-20deg);">🌸</div>
-        
-        <div class="texto-cartita">
-            <p>Holiii mi niña hermosa 💖</p>
-            
-            <div style="display: flex; justify-content: center; margin: -5px 0;">
-                <img src="https://media1.tenor.com/m/aKFaZBrZHY0AAAAd/peach-and-goma-peach-goma.gif" alt="Gatitos" style="width: 100px;">
-            </div>
+        <!-- Botón para ver el PDF -->
+        <a href="Carta_Cumpleanos_V2.pdf" class="btn btn-pdf" target="_blank">📖 Leer mi carta</a>
 
-            <p>Te kiero musho.</p>
-            <p style="line-height: 28px;">La neta te quería hacer una cartita de verdad en papel, pero me dio musha pena dártela en persona...</p>
-            <p>Y aparte mi letra está bien fea jajaja 😭</p>
-            <p>Así que mejor usé la compu para armarte algo más chido con varias hojitas. Osiosi.</p>
-        </div>
-        <div class="controles" style="justify-content: flex-end;">
-            <button class="btn-nav" onclick="cambiarHoja(1, 2)">Siguiente ➡️</button>
-        </div>
+        <!-- Botón para el modo práctica (enlace a tu juego de práctica en Roblox) -->
+        <a href="URL_DE_TU_JUEGO_DE_ROBLOX" class="btn btn-practica">🎯 Modo Práctica (Aim)</a>
+
+        <!-- Botón extra -->
+        <a href="#" class="btn btn-extra">✨ Mensaje secreto</a>
     </div>
-
-    <div class="hojita" id="hoja2">
-        <div class="sticker" style="top: -15px; left: 50%; font-size: 2.5rem;">📌</div>
-        
-        <div class="texto-cartita">
-            <p>Quería decirte que me gustas más que ver Coraline un millón de veces seguidas 🐈‍⬛🗝️</p>
-            
-            <div class="polaroid" style="transform: rotate(4deg);">
-                <img src="pictures/foto1.jpg" alt="Foto 1" onerror="this.src='https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=300';">
-                <div class="polaroid-texto">Pon tu fotito 1 aquí ✨</div>
-            </div>
-
-            <p>Eres más especial que la puerta secreta, y prometo nunca quererte poner botones en los ojos 👀 (es bromis).</p>
-        </div>
-        <div class="controles">
-            <button class="btn-nav" onclick="cambiarHoja(2, 1)">⬅️ Atrás</button>
-            <button class="btn-nav" onclick="cambiarHoja(2, 3)">Siguiente ➡️</button>
-        </div>
-    </div>
-
-    <div class="hojita" id="hoja3">
-        <div class="sticker" style="top: 20px; right: 20px; font-size: 1.5rem;">✨</div>
-        
-        <div class="texto-cartita">
-            <p>Y también jugar MM2 contigo en Roblox es lo mejor del mundo 🔪🔫</p>
-            
-            <div style="display: flex; justify-content: center; margin: 5px 0;">
-                <img src="https://media1.tenor.com/m/Jd1k-qFv90MAAAAd/peach-and-goma-peach-goma.gif" alt="Gatito jugando" style="width: 110px;">
-            </div>
-
-            <p style="line-height: 28px;">No importa si me toca ser inocente y me matan luego luego jajaja, contigo todo es divertido.</p>
-            <p>Tú eres mi sheriff faborita que siempre me salva (o me elimina si eres murderer 👻).</p>
-        </div>
-        <div class="controles">
-            <button class="btn-nav" onclick="cambiarHoja(3, 2)">⬅️ Atrás</button>
-            <button class="btn-nav" onclick="cambiarHoja(3, 4)">Siguiente ➡️</button>
-        </div>
-    </div>
-
-    <div class="hojita" id="hoja4">
-        <div class="sticker" style="top: 10px; left: 10px; font-size: 1.8rem;">🎈</div>
-        
-        <div class="texto-cartita">
-            <p>A veses me pongo a pensar en lo suertudo que soy de tenerte a mi lado.</p>
-            <p>Me encanta cuando estamos aburridos y nos ponemos a platicar de cualquier tontería o a mandarnos tiktoks bien graciosos de gatitos 🐱</p>
-            
-            <div class="polaroid" style="transform: rotate(-3deg);">
-                <img src="pictures/foto2.jpg" alt="Foto 2" onerror="this.src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300';">
-                <div class="polaroid-texto">Pon tu fotito 2 aquí 💕</div>
-            </div>
-            
-            <p>Contigo nunca me aburro, en serio eres mi persona favorita.</p>
-        </div>
-        <div class="controles">
-            <button class="btn-nav" onclick="cambiarHoja(4, 3)">⬅️ Atrás</button>
-            <button class="btn-nav" onclick="cambiarHoja(4, 5)">Siguiente ➡️</button>
-        </div>
-    </div>
-
-    <div class="hojita" id="hoja5">
-        <div class="sticker" style="bottom: 90px; right: -5px; font-size: 1.5rem;">🩹</div>
-        
-        <div class="texto-cartita">
-            <p>Me gustas mushisimo por cómo eres con migo. Me fasina tu risa y cuando te pones tímida jeje uff 😊</p>
-            
-            <div style="display: flex; justify-content: center; margin: 10px 0;">
-                <img src="https://media.tenor.com/79b_9_XvY9gAAAAi/peach-goma.gif" alt="Gatito feliz" style="width: 100px;">
-            </div>
-
-            <p style="line-height: 28px;">Me haces sentir bien bonito cuando me mandas mensajes de los buenos días o cuando me dises cosas lindas.</p>
-            <p>Eres perfecta tal como eres y no cambiaría nada de ti por nada del mundo 💞</p>
-        </div>
-        <div class="controles">
-            <button class="btn-nav" onclick="cambiarHoja(5, 4)">⬅️ Atrás</button>
-            <button class="btn-nav" onclick="cambiarHoja(5, 6)">Siguiente ➡️</button>
-        </div>
-    </div>
-
-    <div class="hojita" id="hoja6">
-        <div class="sticker" style="top: 15px; right: 10px; font-size: 1.8rem;">🌟</div>
-        
-        <div class="texto-cartita">
-            <p>Si fueramos un ekipo en cualquier juego, se que siempre ganaríamos porque nos acomodamos bien chido 🏆</p>
-            <p>Prometo siempre cuidarte, escucharte cuando estés un poco trisitay intentar sacarte una sonrisota gigante.</p>
-            
-            <div class="polaroid" style="transform: rotate(2deg);">
-                <img src="pictures/foto3.jpg" alt="Foto 3" onerror="this.src='https://images.unsplash.com/photo-1495214783159-3503fd1b572d?w=300';">
-                <div class="polaroid-texto">Pon tu fotito 3 aquí 📸</div>
-            </div>
-            
-            <p>¡Siempre juntos contra el mundo! Osiosi 🧸</p>
-        </div>
-        <div class="controles">
-            <button class="btn-nav" onclick="cambiarHoja(6, 5)">⬅️ Atrás</button>
-            <button class="btn-nav" onclick="cambiarHoja(6, 7)">Siguiente ➡️</button>
-        </div>
-    </div>
-
-    <div class="hojita" id="hoja7">
-        <div class="sticker" style="top: 10px; left: 15px; font-size: 1.8rem;">📝</div>
-        
-        <div class="texto-cartita">
-            <p class="text-pink-600 font-bold">Cosas que aremos juntos si o si:</p>
-            <ul style="list-style-type: none; padding-left: 10px; line-height: 34px;">
-                <li>🟩 1. Jugar Roblox hasta que nos de sueño 🎮</li>
-                <li>🟩 2. Ver pelis de terror (pero me abrasas si me da miedo) 🍿</li>
-                <li>🟩 3. Mandarnos gatitos lindos todos los días sin falta 🐱</li>
-                <li>🟩 4. Querernos cada día más y más y más.</li>
-            </ul>
-            
-            <div style="display: flex; justify-content: center; margin-top: 15px;">
-                <img src="https://media.tenor.com/Y36T-C72Z7gAAAAi/peach-and-goma-peach-goma.gif" alt="Besitos" style="width: 110px;">
-            </div>
-        </div>
-        <div class="controles">
-            <button class="btn-nav" onclick="cambiarHoja(7, 6)">⬅️ Atrás</button>
-            <button class="btn-nav" onclick="cambiarHoja(7, 8)">Siguiente ➡️</button>
-        </div>
-    </div>
-
-    <div class="hojita" id="hoja8">
-        <div class="sticker" style="top: 10px; left: 10px; font-size: 2rem;">🎀</div>
-        <div class="sticker" style="bottom: 70px; right: 10px; font-size: 2rem;">💘</div>
-
-        <div class="texto-cartita">
-            <p>Bueno, ahora sí ya llegamos a la última hojita de esta mini libreta virtual... 🥺</p>
-            <p>Solo quería recordarte por última vez que te amodoro muchisisisimo y que eres la mejor nobia de todo el uniberso entero.</p>
-            
-            <div class="polaroid" style="transform: rotate(-3deg);">
-                <img src="pictures/foto4.jpg" alt="Foto 4" onerror="this.src='https://images.unsplash.com/photo-1574158622643-69d34d72650a?w=300';">
-                <div class="polaroid-texto">Tú y yo por siempre 💕</div>
-            </div>
-
-            <p style="text-align: center; line-height: 26px;">Grasias por existir y por hacerme tan feliz cada día.</p>
-            <p style="text-align: right; margin-top: 5px; color: #db2777; font-size: 24px;"><strong>Att: Tu niño ❤️</strong></p>
-        </div>
-        <div class="controles" style="justify-content: flex-start;">
-            <button class="btn-nav" onclick="cambiarHoja(8, 7)">⬅️ Atrás</button>
-        </div>
-    </div>
-
-    <script>
-        function cambiarHoja(actual, siguiente) {
-            document.getElementById('hoja' + actual).classList.remove('activa');
-            document.getElementById('hoja' + siguiente).classList.add('activa');
-        }
-    </script>
 </body>
 </html>
