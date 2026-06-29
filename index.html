@@ -2,39 +2,275 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Para Shofi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Shofi 🌸</title>
+    <!-- Librería para el confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #fdfbf7; padding: 20px; }
-        .btn { display: block; width: 200px; margin: 10px auto; padding: 15px; background: #ffcc00; text-decoration: none; color: black; border-radius: 10px; font-weight: bold; }
-        #game-container { display: none; margin-top: 20px; border: 2px solid #333; height: 300px; position: relative; background: white; cursor: crosshair; }
-        .target { width: 40px; height: 40px; background: red; border-radius: 50%; position: absolute; }
+        /* Diseño general minimalista y pastel */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcf5f7; /* Fondo rosa ultra claro */
+            color: #5a4b50;
+            text-align: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+        }
+
+        h1 {
+            color: #ff8da1;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #887a7e;
+        }
+
+        /* Temporizador */
+        .timer-box {
+            background-color: #fff0f5;
+            padding: 15px;
+            border-radius: 16px;
+            margin: 20px 0;
+            font-weight: 600;
+            color: #ff7b93;
+            font-size: 15px;
+        }
+
+        /* Botones bonitos */
+        .btn {
+            display: block;
+            width: 85%;
+            margin: 15px auto;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-pdf { background-color: #ffb6c1; color: white; }
+        .btn-game { background-color: #ffd1dc; color: #5a4b50; }
+        .btn-msg { background-color: #ffe4e1; color: #5a4b50; }
+
+        /* Mensaje oculto/visible */
+        #special-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            background-color: #fdfbf7;
+            border: 2px dashed #ffb6c1;
+            font-style: italic;
+        }
+
+        /* Juego de Aim Minimalista */
+        #game-container {
+            display: none;
+            margin-top: 30px;
+            border-radius: 16px;
+            background-color: #fafafa;
+            border: 2px solid #ffb6c1;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        .game-header {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: #ff7b93;
+            border-bottom: 2px solid #ffe4e1;
+            background: white;
+        }
+
+        /* Diana con líneas blancas */
+        .target {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            /* Círculo con rayas intercaladas tipo tiro al blanco */
+            background: repeating-radial-gradient(circle, #ff7b93 0, #ff7b93 25%, white 25%, white 50%);
+            position: absolute;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.1s;
+        }
+        .target:active { transform: scale(0.8); }
+
+        #win-text {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff7b93;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(255,182,193,0.4);
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
-    <h1>¡Feliz Cumpleaños Shofi!</h1>
-    <a href="Carta_Cumpleanos_V2.pdf" class="btn" target="_blank">📖 Leer mi carta</a>
-    <button class="btn" onclick="startGame()">🎯 Iniciar Práctica Aim</button>
 
-    <div id="game-container" onclick="miss()"></div>
-    <p id="score">Puntuación: 0</p>
+<div class="container">
+    <h1>¡Feliz Cumpleaños, Shofi! 🌸</h1>
+    <p>He preparado este pequeño espacio solo para ti.</p>
 
-    <script>
-        let score = 0;
-        function startGame() {
-            document.getElementById('game-container').style.display = 'block';
-            spawnTarget();
+    <!-- Temporizador -->
+    <div class="timer-box" id="timer">Calculando nuestro tiempo...</div>
+
+    <!-- Botón para la Carta PDF -->
+    <a href="Carta_Cumpleanos_V2.pdf" class="btn btn-pdf" target="_blank">📖 Abrir mi carta para ti</a>
+
+    <!-- Botón para el Mensaje Bonito -->
+    <button class="btn btn-msg" onclick="toggleMessage()">✨ Un mensaje especial</button>
+    <div id="special-message">
+        "Shofi, gracias por dejarme ser parte de tus días y por iluminar los míos. 
+        Eres increíble, me haces súper feliz y espero que este nuevo año esté lleno 
+        de risas y momentos inolvidables juntos. ¡Te quiero muchísimo!"
+    </div>
+
+    <!-- Botón para el Minijuego -->
+    <button class="btn btn-game" onclick="startGame()">🎯 Práctica de Aim (Mini-juego)</button>
+
+    <!-- Área del Minijuego -->
+    <div id="game-container" onclick="miss()">
+        <div class="game-header">
+            <span id="score">Puntos: 0</span>
+            <span id="game-info">¡Apunta al centro! (Llega a 10)</span>
+        </div>
+        <div id="win-text">¡Eres la mejor! 💖</div>
+        <div id="game-area"></div>
+    </div>
+</div>
+
+<script>
+    // --- LÓGICA DEL TEMPORIZADOR ---
+    const startDate = new Date("June 27, 2026 00:00:00").getTime();
+
+    setInterval(function() {
+        const now = new Date().getTime();
+        const distance = now - startDate;
+
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = 
+                "Momentos juntos desde el 27 de Junio:<br>" + 
+                days + " días, " + hours + " hrs, " + minutes + " min, " + seconds + " seg";
         }
-        function spawnTarget() {
-            const container = document.getElementById('game-container');
-            container.innerHTML = '';
-            const t = document.createElement('div');
-            t.className = 'target';
-            t.style.top = Math.random() * 260 + 'px';
-            t.style.left = Math.random() * 560 + 'px';
-            t.onclick = (e) => { e.stopPropagation(); score++; document.getElementById('score').innerText = 'Puntuación: ' + score; spawnTarget(); };
-            container.appendChild(t);
+    }, 1000);
+
+    // --- LÓGICA DEL MENSAJE VISIBLE ---
+    function toggleMessage() {
+        const msgBox = document.getElementById("special-message");
+        if (msgBox.style.display === "block") {
+            msgBox.style.display = "none";
+        } else {
+            msgBox.style.display = "block";
         }
-        function miss() { score = Math.max(0, score - 1); document.getElementById('score').innerText = 'Puntuación: ' + score; }
-    </script>
+    }
+
+    // --- LÓGICA DEL MINIJUEGO DE AIM ---
+    let score = 0;
+    let playing = false;
+
+    function startGame() {
+        const container = document.getElementById('game-container');
+        container.style.display = 'block';
+        document.getElementById('win-text').style.display = 'none';
+        score = 0;
+        playing = true;
+        updateScoreDisplay();
+        spawnTarget();
+    }
+
+    function spawnTarget() {
+        if (!playing) return;
+        const gameArea = document.getElementById('game-area');
+        gameArea.innerHTML = ''; 
+        
+        const target = document.createElement('div');
+        target.className = 'target';
+        
+        // Calcular posiciones para que no se salga del borde (350 alto, 100% ancho)
+        const maxWidth = document.getElementById('game-container').clientWidth - 60;
+        const topPos = Math.random() * 240 + 40; 
+        const leftPos = Math.random() * maxWidth + 10;
+        
+        target.style.top = topPos + 'px';
+        target.style.left = leftPos + 'px';
+        
+        // Al hacer clic en la diana
+        target.onclick = (e) => {
+            e.stopPropagation(); // Evita que cuente como fallo
+            score++;
+            updateScoreDisplay();
+            
+            if (score >= 10) {
+                winGame();
+            } else {
+                spawnTarget();
+            }
+        };
+        
+        gameArea.appendChild(target);
+    }
+
+    function miss() {
+        if (!playing) return;
+        score = Math.max(0, score - 1); // Pierde 1 punto si falla, pero no baja de 0
+        updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+        document.getElementById('score').innerText = 'Puntos: ' + score;
+    }
+
+    function winGame() {
+        playing = false;
+        document.getElementById('game-area').innerHTML = '';
+        document.getElementById('win-text').style.display = 'block';
+        
+        // Lanzar el confeti
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ffb6c1', '#ffd1dc', '#ffffff', '#ff69b4']
+        });
+    }
+</script>
+
 </body>
 </html>
